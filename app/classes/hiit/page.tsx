@@ -10,14 +10,14 @@ const hiitData: ClassData = {
   duration: '45 min',
   level: 'Intermediate',
   calories: '500–700',
-  description: 'HIIT Burn is APEX\'s most popular — and most brutal — class. Using a science-backed work-to-rest ratio of 40:20, you\'ll push through explosive intervals of bodyweight movements, plyometrics, and functional cardio. The result? You torch calories during the workout and keep burning for up to 36 hours after due to the EPOC (excess post-exercise oxygen consumption) effect. No equipment needed. Just you, your heart rate, and a willingness to be uncomfortable.',
+  description: 'HIIT Burn is APEX\'s most popular -and most brutal -class. Using a science-backed work-to-rest ratio of 40:20, you\'ll push through explosive intervals of bodyweight movements, plyometrics, and functional cardio. The result? You torch calories during the workout and keep burning for up to 36 hours after due to the EPOC (excess post-exercise oxygen consumption) effect. No equipment needed. Just you, your heart rate, and a willingness to be uncomfortable.',
   benefits: [
     'Burns 500–700 calories per session',
     'Elevated metabolism for 24–36 hours post-workout',
     'Improved cardiovascular endurance and VO2 max',
     'Builds explosive power and athletic performance',
-    'No equipment required — do it anywhere',
-    'Efficient — maximum results in minimum time',
+    'No equipment required -do it anywhere',
+    'Efficient -maximum results in minimum time',
   ],
   instructor: {
     name: 'Marcus Cole',
@@ -48,7 +48,7 @@ const hiitData: ClassData = {
   reviews: [
     { name: 'David Kim', initials: 'DK', rating: 5, plan: 'PRO', body: 'Marcus is an absolute machine as an instructor. His energy is unmatched and he somehow makes you push harder than you thought possible. Lost 8kg in 3 months just from HIIT Burn alone.' },
     { name: 'Shreya Kapoor', initials: 'SK', rating: 5, plan: 'ELITE', body: 'I was scared to try HIIT but the foundations video eased me in perfectly. Now I do the live classes 3x a week and the transformation has been unreal. My resting heart rate dropped 12 BPM.' },
-    { name: 'James Okafor', initials: 'JO', rating: 4, plan: 'PRO', body: 'Best HIIT content I\'ve found online. The 45-min full class is my weekly benchmark — I track how many rounds I can complete and the progress over months is incredibly motivating.' },
+    { name: 'James Okafor', initials: 'JO', rating: 4, plan: 'PRO', body: 'Best HIIT content I\'ve found online. The 45-min full class is my weekly benchmark -I track how many rounds I can complete and the progress over months is incredibly motivating.' },
   ],
 }
 

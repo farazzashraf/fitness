@@ -12,7 +12,8 @@ const plans = {
 function CheckoutContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const planKey = (searchParams.get('plan') || 'pro') as keyof typeof plans
+  const initialPlanKey = (searchParams.get('plan') || 'pro') as keyof typeof plans
+  const [planKey, setPlanKey] = useState<keyof typeof plans>(initialPlanKey)
   const plan = plans[planKey] || plans.pro
 
   const [billing, setBilling] = useState<'monthly' | 'annual'>('monthly')
@@ -134,12 +135,12 @@ function CheckoutContent() {
         </div>
       </nav>
 
-      <div style={{ maxWidth: 1000, margin: '0 auto', padding: '48px 5%', display: 'grid', gridTemplateColumns: '1fr 380px', gap: 40 }}>
+      <div className="checkout-layout" style={{ maxWidth: 1000, margin: '0 auto', padding: '48px 5%', display: 'grid', gridTemplateColumns: 'minmax(0,1fr) clamp(280px, 30vw, 380px)', gap: 40 }}>
 
         {/* ── Left: Payment Form ── */}
         <div>
           <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 4 }}>Complete your order</h1>
-          <p style={{ color: '#555', fontSize: 14, marginBottom: 36 }}>14-day free trial — no charge today</p>
+          <p style={{ color: '#555', fontSize: 14, marginBottom: 36 }}>14-day free trial -no charge today</p>
 
           {/* Billing toggle */}
           <div style={{ marginBottom: 32 }}>
@@ -286,7 +287,7 @@ function CheckoutContent() {
             onMouseEnter={e => e.currentTarget.style.boxShadow = '0 8px 32px rgba(201,255,0,0.35)'}
             onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
           >
-            🔒 Start Free Trial — Pay Nothing Today
+            🔒 Start Free Trial -Pay Nothing Today
           </button>
 
           <p style={{ textAlign: 'center', fontSize: 12, color: '#444', marginTop: 14 }}>
@@ -299,24 +300,23 @@ function CheckoutContent() {
           <div style={{ background: '#0f0f0f', border: '1px solid #1a1a1a', borderRadius: 20, padding: 28, position: 'sticky', top: 88 }}>
             <div style={{ fontSize: 12, color: '#555', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 20 }}>Order Summary</div>
 
-            {/* Plan badge */}
-            <div style={{
-              background: 'rgba(201,255,0,0.06)', border: '1px solid rgba(201,255,0,0.15)',
-              borderRadius: 14, padding: '16px 20px', marginBottom: 24,
-              display: 'flex', alignItems: 'center', gap: 14,
-            }}>
-              <div style={{
-                width: 44, height: 44, borderRadius: 10,
-                background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <span className="font-display" style={{ color: '#000', fontSize: 20 }}>A</span>
-              </div>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: 16 }}>APEX {plan.name}</div>
-                <div style={{ color: 'var(--accent)', fontSize: 12, marginTop: 2, fontWeight: 600 }}>
-                  {billing === 'annual' ? 'Annual Plan' : 'Monthly Plan'}
-                </div>
-              </div>
+            {/* Plan Selection */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 24 }}>
+              {(Object.keys(plans) as Array<keyof typeof plans>).map(k => (
+                <button key={k} onClick={() => setPlanKey(k)} style={{
+                  padding: '14px 0',
+                  background: planKey === k ? 'rgba(201,255,0,0.08)' : '#0f0f0f',
+                  border: `1px solid ${planKey === k ? 'var(--accent)' : '#222'}`,
+                  borderRadius: 12, color: planKey === k ? '#fff' : '#666',
+                  fontSize: 14, fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4
+                }}>
+                  <span style={{ color: planKey === k ? 'var(--accent)' : '#aaa' }}>APEX {plans[k].name}</span>
+                  <span style={{ fontSize: 12, fontWeight: 400 }}>
+                    ₹{(billing === 'annual' ? plans[k].annual : plans[k].price).toLocaleString('en-IN')}/{billing === 'annual' ? 'yr' : 'mo'}
+                  </span>
+                </button>
+              ))}
             </div>
 
             {/* Features */}
@@ -352,7 +352,7 @@ function CheckoutContent() {
                 {billing === 'annual' && (
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#4ade80' }}>
                     <span>Annual discount (20%)</span>
-                    <span>— ₹{Math.round(plan.price * 12 * 0.2).toLocaleString('en-IN')}</span>
+                    <span>-₹{Math.round(plan.price * 12 * 0.2).toLocaleString('en-IN')}</span>
                   </div>
                 )}
               </div>
@@ -361,8 +361,14 @@ function CheckoutContent() {
                 <span style={{ fontWeight: 700 }}>Due today</span>
                 <span className="font-display" style={{ fontSize: 28, color: 'var(--accent)', letterSpacing: 1 }}>₹0</span>
               </div>
-              <div style={{ fontSize: 11, color: '#444', textAlign: 'right', marginTop: 4 }}>
-                Then ₹{(price + Math.round(price * 0.18)).toLocaleString('en-IN')}/{billing === 'annual' ? 'year' : 'mo'} after trial
+              <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid #222', borderRadius: 8, padding: '12px 16px', marginTop: 16 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: 13, color: '#ccc', fontWeight: 600 }}>Total after 14-day trial</span>
+                  <span style={{ fontSize: 18, fontWeight: 700, color: '#fff' }}>
+                    ₹{(price + Math.round(price * 0.18)).toLocaleString('en-IN')}
+                    <span style={{ fontSize: 12, color: '#666', fontWeight: 400 }}>/{billing === 'annual' ? 'yr' : 'mo'}</span>
+                  </span>
+                </div>
               </div>
             </div>
 

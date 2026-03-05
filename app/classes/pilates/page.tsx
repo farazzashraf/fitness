@@ -10,9 +10,9 @@ const pilatesData: ClassData = {
   duration: '50 min',
   level: 'Beginner',
   calories: '250–350',
-  description: 'Core Pilates at APEX is built on the classical Joseph Pilates method, modernized for today\'s body. We focus on the powerhouse — your core, lower back, hips, and glutes — using slow, controlled movements that activate deep stabilizing muscles most exercise ignores. The result is a stronger foundation for everything else you do: better posture, reduced back pain, improved athletic performance, and a noticeably leaner silhouette. Perfect for beginners and ideal as a complement to any other training.',
+  description: 'Core Pilates at APEX is built on the classical Joseph Pilates method, modernized for today\'s body. We focus on the powerhouse -your core, lower back, hips, and glutes -using slow, controlled movements that activate deep stabilizing muscles most exercise ignores. The result is a stronger foundation for everything else you do: better posture, reduced back pain, improved athletic performance, and a noticeably leaner silhouette. Perfect for beginners and ideal as a complement to any other training.',
   benefits: [
-    'Deep core strength — not just abs, but full stabilizer system',
+    'Deep core strength -not just abs, but full stabilizer system',
     'Corrected posture and reduced chronic back pain',
     'Longer, leaner muscle tone without bulk',
     'Improved balance, coordination and body control',
@@ -47,7 +47,7 @@ const pilatesData: ClassData = {
   ],
   reviews: [
     { name: 'Lakshmi Reddy', initials: 'LR', rating: 5, plan: 'ELITE', body: 'Sofia is the most technically precise instructor I\'ve ever had. I came in with a herniated disc and her modified sequences gave me relief when nothing else did. Absolute life changer.' },
-    { name: 'Meera Iyer', initials: 'MI', rating: 5, plan: 'PRO', body: 'I was nervous about Pilates — thought it would be too easy. I was humbled in the first 10 minutes. The core burn is unlike anything else. My posture has completely transformed in 3 months.' },
+    { name: 'Meera Iyer', initials: 'MI', rating: 5, plan: 'PRO', body: 'I was nervous about Pilates -thought it would be too easy. I was humbled in the first 10 minutes. The core burn is unlike anything else. My posture has completely transformed in 3 months.' },
     { name: 'Ananya Singh', initials: 'AS', rating: 5, plan: 'PRO', body: 'Best decision I ever made. I was doing heavy lifting for years but completely neglecting my core. Since adding Pilates twice a week my lifts have gone up and my back pain has disappeared.' },
   ],
 }

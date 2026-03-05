@@ -10,7 +10,7 @@ const strengthData: ClassData = {
   duration: '75 min',
   level: 'Advanced',
   calories: '400–600',
-  description: 'Iron Strength is APEX\'s most advanced program — a structured, progressive resistance training class built around the fundamental compound movements: squat, deadlift, bench, and overhead press. Each 12-week training block is periodized to systematically increase load and volume, ensuring continuous adaptation and muscle growth. Classes are small (max 10 members) to allow for individual coaching, form correction, and real progressive overload tracking. This is serious training for serious athletes.',
+  description: 'Iron Strength is APEX\'s most advanced program -a structured, progressive resistance training class built around the fundamental compound movements: squat, deadlift, bench, and overhead press. Each 12-week training block is periodized to systematically increase load and volume, ensuring continuous adaptation and muscle growth. Classes are small (max 10 members) to allow for individual coaching, form correction, and real progressive overload tracking. This is serious training for serious athletes.',
   benefits: [
     'Scientifically programmed progressive overload',
     'Expert coaching on the 4 major compound lifts',
@@ -41,7 +41,7 @@ const strengthData: ClassData = {
     { title: 'Full Iron Strength Session', duration: '75 min', locked: true },
     { title: 'Bench Press Progression', duration: '30 min', locked: true },
     { title: 'Overhead Press & Shoulders', duration: '35 min', locked: true },
-    { title: 'Week 1 Block A — Full Session', duration: '70 min', locked: true },
+    { title: 'Week 1 Block A -Full Session', duration: '70 min', locked: true },
     { title: 'Accessory Work Library', duration: '40 min', locked: true },
     { title: 'Deload Week Protocol', duration: '45 min', locked: true },
   ],

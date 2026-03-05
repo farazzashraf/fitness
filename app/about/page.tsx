@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 
 const NAV_LINKS = [['Classes', '/classes'], ['Pricing', '/pricing'], ['About', '/about'], ['Blog', '/blog']]
@@ -22,40 +23,53 @@ const milestones = [
 ]
 
 function SharedNav({ active }: { active: string }) {
+  const [menuOpen, setMenuOpen] = useState(false)
   return (
-    <nav style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      background: 'rgba(8,8,8,0.95)', backdropFilter: 'blur(12px)',
-      borderBottom: '1px solid #1a1a1a', padding: '0 5%',
-    }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 36, height: 36, background: 'var(--accent)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <span className="font-display" style={{ color: '#000', fontSize: 20 }}>A</span>
+    <>
+      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: menuOpen ? 'rgba(8,8,8,0.99)' : 'rgba(8,8,8,0.95)', backdropFilter: 'blur(12px)', borderBottom: '1px solid #1a1a1a', padding: '0 5%' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }} onClick={() => setMenuOpen(false)}>
+            <div style={{ width: 36, height: 36, background: 'var(--accent)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span className="font-display" style={{ color: '#000', fontSize: 20 }}>A</span>
+            </div>
+            <span className="font-display" style={{ fontSize: 28, letterSpacing: 4, color: '#fff' }}>APEX</span>
+          </Link>
+          <div className="nav-links" style={{ gap: 40, alignItems: 'center' }}>
+            {NAV_LINKS.map(([label, href]) => (
+              <Link key={label} href={href} style={{ color: label === active ? 'var(--accent)' : '#aaa', textDecoration: 'none', fontSize: 14, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
+                onMouseLeave={e => (e.currentTarget.style.color = label === active ? 'var(--accent)' : '#aaa')}
+              >{label}</Link>
+            ))}
           </div>
-          <span className="font-display" style={{ fontSize: 28, letterSpacing: 4, color: '#fff' }}>APEX</span>
-        </Link>
-        <div style={{ display: 'flex', gap: 40, alignItems: 'center' }}>
-          {NAV_LINKS.map(([label, href]) => (
-            <Link key={label} href={href} style={{
-              color: label === active ? 'var(--accent)' : '#aaa',
-              textDecoration: 'none', fontSize: 14, fontWeight: 600,
-              letterSpacing: 1, textTransform: 'uppercase', transition: 'color 0.2s',
-            }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
-              onMouseLeave={e => (e.currentTarget.style.color = label === active ? 'var(--accent)' : '#aaa')}
-            >{label}</Link>
-          ))}
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <Link href="/login" className="nav-links" style={{ color: '#aaa', textDecoration: 'none', fontSize: 14, fontWeight: 600 }}>Log In</Link>
+            <Link href="/register" style={{ background: 'var(--accent)', color: '#000', padding: '10px 20px', borderRadius: 8, textDecoration: 'none', fontSize: 13, fontWeight: 700, whiteSpace: 'nowrap' }}>Join Now</Link>
+            <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{ background: 'none', border: '1px solid #333', borderRadius: 8, width: 40, height: 40, alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexDirection: 'column', gap: 5, padding: 0 }}>
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', transform: menuOpen ? 'rotate(45deg) translate(3px, 3px)' : 'none' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', opacity: menuOpen ? 0 : 1 }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', transform: menuOpen ? 'rotate(-45deg) translate(3px, -3px)' : 'none' }} />
+            </button>
+          </div>
         </div>
-        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-          <Link href="/login" style={{ color: '#aaa', textDecoration: 'none', fontSize: 14, fontWeight: 600 }}>Log In</Link>
-          <Link href="/register" style={{
-            background: 'var(--accent)', color: '#000', padding: '10px 24px',
-            borderRadius: 8, textDecoration: 'none', fontSize: 14, fontWeight: 700, letterSpacing: 1,
-          }}>Join Free</Link>
-        </div>
+      </nav>
+      <div style={{
+        display: menuOpen ? 'flex' : 'none',
+        flexDirection: 'column',
+        position: 'fixed', top: 72, left: 0, right: 0, zIndex: 200,
+        background: 'rgba(8,8,8,0.99)', backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid #1a1a1a',
+        padding: '12px 24px 20px',
+        gap: 4,
+        animation: menuOpen ? 'fadeIn 0.15s ease' : 'none',
+      }}>
+        {NAV_LINKS.map(([label, href]) => (
+          <Link key={label} href={href} onClick={() => setMenuOpen(false)} style={{ display:'block',padding:'14px 12px',borderRadius:10,fontSize:14,fontWeight:700,letterSpacing:1,textTransform:'uppercase' as const,textDecoration:'none',borderBottom:'1px solid #111', color: label === active ? 'var(--accent)' : '#ccc' }}>{label}</Link>
+        ))}
+        <Link href="/login" onClick={() => setMenuOpen(false)} style={{ display:'block',padding:'14px 12px',borderRadius:10,fontSize:14,fontWeight:700,letterSpacing:1,textTransform:'uppercase' as const,textDecoration:'none',borderBottom:'1px solid #111', color: '#666' }}>Log In</Link>
+        <Link href="/register" onClick={() => setMenuOpen(false)} style={{ display:'block', padding:'14px 12px', borderRadius:10, fontSize:14, fontWeight:800, textDecoration:'none', color: 'var(--accent)' }}>Join Free →</Link>
       </div>
-    </nav>
+    </>
   )
 }
 
@@ -82,7 +96,7 @@ export default function AboutPage() {
 
       {/* Mission */}
       <section style={{ padding: '100px 5%' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
+        <div className='about-mission-grid' style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }}>
           <div>
             <span style={{ color: 'var(--accent)', fontSize: 12, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase' }}>Our Mission</span>
             <h2 className="font-display" style={{ fontSize: 'clamp(36px, 5vw, 60px)', letterSpacing: 2, marginTop: 12, marginBottom: 28 }}>

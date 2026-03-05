@@ -190,78 +190,74 @@ function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Close menu on route click
+  const closeMenu = () => setMenuOpen(false)
+
   return (
-    <nav
-      style={{
+    <>
+      <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
         transition: 'all 0.3s ease',
-        background: scrolled ? 'rgba(8,8,8,0.95)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid #222' : '1px solid transparent',
+        background: scrolled || menuOpen ? 'rgba(8,8,8,0.97)' : 'transparent',
+        backdropFilter: scrolled || menuOpen ? 'blur(12px)' : 'none',
+        borderBottom: scrolled || menuOpen ? '1px solid #222' : '1px solid transparent',
         padding: '0 5%',
-      }}
-    >
-      <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
-        {/* Logo */}
-        <Link href="/" style={{ textDecoration: 'none' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <div style={{
-              width: 36, height: 36, background: 'var(--accent)', borderRadius: 8,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <span className="font-display" style={{ color: '#000', fontSize: 20, lineHeight: 1 }}>A</span>
+      }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
+          {/* Logo */}
+          <Link href="/" style={{ textDecoration: 'none' }} onClick={closeMenu}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ width: 36, height: 36, background: 'var(--accent)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span className="font-display" style={{ color: '#000', fontSize: 20, lineHeight: 1 }}>A</span>
+              </div>
+              <span className="font-display" style={{ fontSize: 28, letterSpacing: 4, color: '#fff' }}>APEX</span>
             </div>
-            <span className="font-display" style={{ fontSize: 28, letterSpacing: 4, color: '#fff' }}>APEX</span>
+          </Link>
+
+          {/* Desktop Nav Links */}
+          <div className="nav-links" style={{ gap: 40, alignItems: 'center' }}>
+            {['Classes', 'Pricing', 'About', 'Blog'].map((item) => (
+              <Link key={item} href={`/${item.toLowerCase()}`} style={{ color: '#aaa', textDecoration: 'none', fontSize: 14, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#aaa')}
+              >{item}</Link>
+            ))}
           </div>
-        </Link>
 
-        {/* Nav Links */}
-        <div style={{ display: 'flex', gap: 40, alignItems: 'center' }} className="hidden-mobile">
-          {['Classes', 'Pricing', 'About', 'Blog'].map((item) => (
-            <Link
-              key={item}
-              href={`/${item.toLowerCase()}`}
-              style={{
-                color: '#aaa', textDecoration: 'none', fontSize: 14,
-                fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase',
-                transition: 'color 0.2s',
-              }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#aaa')}
-            >
-              {item}
+          {/* Right: CTA + hamburger */}
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <Link href="/login" className="nav-links" style={{ color: '#aaa', textDecoration: 'none', fontSize: 14, fontWeight: 600, letterSpacing: 1 }}>Log In</Link>
+            <Link href="/register" style={{ background: 'var(--accent)', color: '#000', padding: '10px 20px', borderRadius: 8, textDecoration: 'none', fontSize: 13, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+              Join Now
             </Link>
-          ))}
+            {/* Hamburger */}
+            <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{ background: 'none', border: '1px solid #333', borderRadius: 8, width: 40, height: 40, alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexDirection: 'column', gap: 5, padding: 0 }}>
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', transform: menuOpen ? 'rotate(45deg) translate(3px, 3px)' : 'none' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', opacity: menuOpen ? 0 : 1 }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', transform: menuOpen ? 'rotate(-45deg) translate(3px, -3px)' : 'none' }} />
+            </button>
+          </div>
         </div>
+      </nav>
 
-        {/* CTA */}
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <Link href="/login" style={{
-            color: '#aaa', textDecoration: 'none', fontSize: 14,
-            fontWeight: 600, letterSpacing: 1,
-          }}>
-            Log In
-          </Link>
-          <Link href="/register" style={{
-            background: 'var(--accent)', color: '#000', padding: '10px 24px',
-            borderRadius: 8, textDecoration: 'none', fontSize: 14,
-            fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase',
-            transition: 'transform 0.2s, box-shadow 0.2s',
-          }}
-            onMouseEnter={e => {
-              e.currentTarget.style.transform = 'translateY(-2px)'
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(201,255,0,0.3)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = 'none'
-            }}
-          >
-            Join Now
-          </Link>
-        </div>
+      {/* Mobile dropdown menu */}
+      <div style={{
+        display: menuOpen ? 'flex' : 'none',
+        flexDirection: 'column',
+        position: 'fixed', top: 72, left: 0, right: 0, zIndex: 200,
+        background: 'rgba(8,8,8,0.99)', backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid #1a1a1a',
+        padding: '12px 24px 20px',
+        gap: 4,
+        animation: menuOpen ? 'fadeIn 0.15s ease' : 'none',
+      }}>
+        {['Classes', 'Pricing', 'About', 'Blog'].map(item => (
+          <Link key={item} href={`/${item.toLowerCase()}`} onClick={closeMenu} style={{ display:'block',padding:'14px 12px',borderRadius:10,fontSize:14,fontWeight:700,letterSpacing:1,textTransform:'uppercase' as const,textDecoration:'none',borderBottom:'1px solid #111', color: '#ccc' }}>{item}</Link>
+        ))}
+        <Link href="/login" onClick={closeMenu} style={{ display:'block',padding:'14px 12px',borderRadius:10,fontSize:14,fontWeight:700,letterSpacing:1,textTransform:'uppercase' as const,textDecoration:'none',borderBottom:'1px solid #111', color: '#666' }}>Log In</Link>
+        <Link href="/register" onClick={closeMenu} style={{ display:'block', padding:'14px 12px', borderRadius:10, fontSize:14, fontWeight:800, textDecoration:'none', color: 'var(--accent)' }}>Join Free →</Link>
       </div>
-    </nav>
+    </>
   )
 }
 
@@ -293,7 +289,7 @@ function HeroSection() {
       }} />
 
       {/* Content */}
-      <div style={{ position: 'relative', zIndex: 2, padding: '120px 5% 80px', maxWidth: 1280, margin: '0 auto', width: '100%' }}>
+      <div style={{ position: 'relative', zIndex: 2, padding: 'clamp(100px, 15vw, 140px) 5% clamp(60px, 8vw, 80px)', maxWidth: 1280, margin: '0 auto', width: '100%' }}>
         <div style={{ maxWidth: 800 }}>
           {/* Badge */}
           <div
@@ -389,7 +385,7 @@ function HeroSection() {
           {/* Trust bar */}
           <div
             className="animate-fadeUp opacity-0 delay-400"
-            style={{ display: 'flex', gap: 32, marginTop: 64, flexWrap: 'wrap' }}
+            style={{ display: 'flex', gap: 'clamp(16px, 4vw, 32px)', marginTop: 'clamp(32px, 6vw, 64px)', flexWrap: 'wrap' }}
           >
             {stats.map((stat) => (
               <div key={stat.label}>
@@ -407,7 +403,7 @@ function HeroSection() {
 
       {/* Floating card - desktop decoration */}
       <div
-        className="animate-float"
+        className="animate-float hero-float-card"
         style={{
           position: 'absolute', right: '8%', top: '35%',
           background: 'rgba(17,17,17,0.9)',

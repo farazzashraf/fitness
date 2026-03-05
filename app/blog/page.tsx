@@ -130,52 +130,70 @@ const posts = [
 
 const categories = ['All', 'Strength', 'HIIT', 'Yoga', 'Pilates', 'Nutrition', 'Wellness', 'Beginner', 'Mindset']
 
+function MobileNav({ active }: { active: string }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+  return (
+    <>
+      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: menuOpen ? 'rgba(8,8,8,0.99)' : 'rgba(8,8,8,0.95)', backdropFilter: 'blur(12px)', borderBottom: '1px solid #1a1a1a', padding: '0 5%' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
+          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }} onClick={() => setMenuOpen(false)}>
+            <div style={{ width: 36, height: 36, background: 'var(--accent)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span className="font-display" style={{ color: '#000', fontSize: 20 }}>A</span>
+            </div>
+            <span className="font-display" style={{ fontSize: 28, letterSpacing: 4, color: '#fff' }}>APEX</span>
+          </Link>
+          <div className="nav-links" style={{ gap: 40, alignItems: 'center' }}>
+            {NAV_LINKS.map(([label, href]) => (
+              <Link key={label} href={href} style={{ color: label === active ? 'var(--accent)' : '#aaa', textDecoration: 'none', fontSize: 14, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
+                onMouseLeave={e => (e.currentTarget.style.color = label === active ? 'var(--accent)' : '#aaa')}
+              >{label}</Link>
+            ))}
+          </div>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <Link href="/login" className="nav-links" style={{ color: '#aaa', textDecoration: 'none', fontSize: 14, fontWeight: 600 }}>Log In</Link>
+            <Link href="/register" style={{ background: 'var(--accent)', color: '#000', padding: '10px 20px', borderRadius: 8, textDecoration: 'none', fontSize: 13, fontWeight: 700, whiteSpace: 'nowrap' }}>Join Now</Link>
+            <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{ background: 'none', border: '1px solid #333', borderRadius: 8, width: 40, height: 40, alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexDirection: 'column', gap: 5, padding: 0 }}>
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', transform: menuOpen ? 'rotate(45deg) translate(3px, 3px)' : 'none' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', opacity: menuOpen ? 0 : 1 }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', transform: menuOpen ? 'rotate(-45deg) translate(3px, -3px)' : 'none' }} />
+            </button>
+          </div>
+        </div>
+      </nav>
+      <div style={{
+        display: menuOpen ? 'flex' : 'none',
+        flexDirection: 'column',
+        position: 'fixed', top: 72, left: 0, right: 0, zIndex: 200,
+        background: 'rgba(8,8,8,0.99)', backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid #1a1a1a',
+        padding: '12px 24px 20px',
+        gap: 4,
+        animation: menuOpen ? 'fadeIn 0.15s ease' : 'none',
+      }}>
+        {NAV_LINKS.map(([label, href]) => (
+          <Link key={label} href={href} onClick={() => setMenuOpen(false)} style={{ display:'block',padding:'14px 12px',borderRadius:10,fontSize:14,fontWeight:700,letterSpacing:1,textTransform:'uppercase' as const,textDecoration:'none',borderBottom:'1px solid #111', color: label === active ? 'var(--accent)' : '#ccc' }}>{label}</Link>
+        ))}
+        <Link href="/login" onClick={() => setMenuOpen(false)} style={{ display:'block',padding:'14px 12px',borderRadius:10,fontSize:14,fontWeight:700,letterSpacing:1,textTransform:'uppercase' as const,textDecoration:'none',borderBottom:'1px solid #111', color: '#666' }}>Log In</Link>
+        <Link href="/register" onClick={() => setMenuOpen(false)} style={{ display:'block', padding:'14px 12px', borderRadius:10, fontSize:14, fontWeight:800, textDecoration:'none', color: 'var(--accent)' }}>Join Free →</Link>
+      </div>
+    </>
+  )
+}
+
 export default function BlogPage() {
   const [filter, setFilter] = useState('All')
   const [hovered, setHovered] = useState<number | null>(null)
 
   const featured = posts.find(p => p.featured)!
-//   const rest = posts.filter(p => !p.featured)
-  const rest = posts
+  const rest = posts.filter(p => !p.featured)
   const filteredRest = filter === 'All' ? rest : rest.filter(p => p.category === filter)
 
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh', color: '#fff' }}>
 
       {/* Navbar */}
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: 'rgba(8,8,8,0.95)', backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid #1a1a1a', padding: '0 5%',
-      }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <div style={{ width: 36, height: 36, background: 'var(--accent)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span className="font-display" style={{ color: '#000', fontSize: 20 }}>A</span>
-            </div>
-            <span className="font-display" style={{ fontSize: 28, letterSpacing: 4, color: '#fff' }}>APEX</span>
-          </Link>
-          <div style={{ display: 'flex', gap: 40, alignItems: 'center' }}>
-            {NAV_LINKS.map(([label, href]) => (
-              <Link key={label} href={href} style={{
-                color: label === 'Blog' ? 'var(--accent)' : '#aaa',
-                textDecoration: 'none', fontSize: 14, fontWeight: 600,
-                letterSpacing: 1, textTransform: 'uppercase', transition: 'color 0.2s',
-              }}
-                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
-                onMouseLeave={e => (e.currentTarget.style.color = label === 'Blog' ? 'var(--accent)' : '#aaa')}
-              >{label}</Link>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-            <Link href="/login" style={{ color: '#aaa', textDecoration: 'none', fontSize: 14, fontWeight: 600 }}>Log In</Link>
-            <Link href="/register" style={{
-                background: 'var(--accent)', color: '#000', padding: '10px 24px',
-                borderRadius: 8, textDecoration: 'none', fontSize: 14, fontWeight: 700, letterSpacing: 1,
-            }}>Join Free</Link>
-          </div>
-        </div>
-      </nav>
+      <MobileNav active="Blog" />
 
       {/* Hero */}
       <section style={{ paddingTop: 72, padding: '120px 5% 80px', position: 'relative', overflow: 'hidden', borderBottom: '1px solid #111' }}>
@@ -195,13 +213,13 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '60px 5% 100px' }}>
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: 'clamp(32px, 5vw, 60px) 5% clamp(60px, 8vw, 100px)' }}>
 
         {/* Featured post */}
         <div style={{ marginBottom: 60 }}>
           <div style={{ fontSize: 11, color: '#555', letterSpacing: 3, textTransform: 'uppercase', marginBottom: 20 }}>Featured Article</div>
           <div
-            style={{
+            className='blog-featured-grid' style={{
               background: '#0f0f0f', border: `1px solid ${hovered === 0 ? 'rgba(201,255,0,0.25)' : '#1a1a1a'}`,
               borderRadius: 24, padding: '36px 40px', cursor: 'pointer',
               transition: 'all 0.25s', display: 'grid',
@@ -235,7 +253,7 @@ export default function BlogPage() {
               </div>
             </div>
             {/* Thumbnail placeholder */}
-            <div style={{
+            <div className='blog-featured-thumb' style={{
               height: 200, borderRadius: 16,
               background: `linear-gradient(135deg, ${featured.categoryColor}20, #111)`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -330,13 +348,13 @@ export default function BlogPage() {
           <p style={{ color: '#666', fontSize: 15, marginBottom: 32, maxWidth: 440, margin: '0 auto 32px' }}>
             New articles, class announcements, and training tips. Every week. No spam — ever.
           </p>
-          <div style={{ display: 'flex', gap: 10, maxWidth: 440, margin: '0 auto', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', gap: 10, maxWidth: 440, margin: '0 auto', justifyContent: 'center', flexWrap: 'wrap' }}>
             <input
               type="email"
               placeholder="your@email.com"
               style={{
-                flex: 1, background: '#141414', border: '1px solid #222', borderRadius: 10,
-                padding: '13px 16px', color: '#fff', fontSize: 14, outline: 'none',
+                flex: '1 1 200px', background: '#141414', border: '1px solid #222', borderRadius: 10,
+                padding: '13px 16px', color: '#fff', fontSize: 14, outline: 'none', minWidth: 0,
               }}
               onFocus={e => (e.target.style.borderColor = 'rgba(201,255,0,0.4)')}
               onBlur={e => (e.target.style.borderColor = '#222')}
@@ -345,7 +363,7 @@ export default function BlogPage() {
               background: 'var(--accent)', color: '#000', border: 'none',
               borderRadius: 10, padding: '13px 24px', fontSize: 13,
               fontWeight: 800, letterSpacing: 1, cursor: 'pointer',
-              whiteSpace: 'nowrap',
+              whiteSpace: 'nowrap', flexShrink: 0,
             }}>Subscribe →</button>
           </div>
         </div>

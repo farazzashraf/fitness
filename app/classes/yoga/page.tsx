@@ -3,7 +3,7 @@ import ClassPageTemplate, { ClassData } from '../ClassPageTemplate.tsx'
 const yogaData: ClassData = {
   id: 'yoga',
   name: 'Power Yoga',
-  tagline: 'Deep stretches, breathwork, and mindfulness that rebuild your body from the inside out. Find your edge — and push past it.',
+  tagline: 'Deep stretches, breathwork, and mindfulness that rebuild your body from the inside out. Find your edge -and push past it.',
   category: 'Flexibility & Mind',
   emoji: '🧘',
   accentColor: '#7C3AED',
@@ -41,12 +41,12 @@ const yogaData: ClassData = {
     { title: 'Core-Focused Vinyasa', duration: '45 min', locked: true },
     { title: 'Hip Opener Deep Dive', duration: '38 min', locked: true },
     { title: 'Inversion Workshop', duration: '52 min', locked: true },
-    { title: 'Morning Flow — 20 min', duration: '20 min', locked: true },
+    { title: 'Morning Flow -20 min', duration: '20 min', locked: true },
     { title: 'Evening Wind Down', duration: '30 min', locked: true },
     { title: 'Full Power Yoga Class', duration: '60 min', locked: true },
   ],
   reviews: [
-    { name: 'Kavya Menon', initials: 'KM', rating: 5, plan: 'ELITE', body: 'Priya is absolutely phenomenal. I came in with chronic back pain and after 2 months of consistent classes, it\'s almost completely gone. This is not just yoga — it\'s therapy.' },
+    { name: 'Kavya Menon', initials: 'KM', rating: 5, plan: 'ELITE', body: 'Priya is absolutely phenomenal. I came in with chronic back pain and after 2 months of consistent classes, it\'s almost completely gone. This is not just yoga -it\'s therapy.' },
     { name: 'Aisha Patel', initials: 'AP', rating: 5, plan: 'ELITE', body: 'I\'ve tried yoga at 4 different studios and nothing compares to this. The sequencing is intelligent, the cues are precise, and the energy in live classes is electric.' },
     { name: 'Rohit Basu', initials: 'RB', rating: 5, plan: 'PRO', body: 'Started as a complete beginner and within 6 weeks I was doing poses I thought were impossible. The video library is extensive and Priya explains every pose beautifully.' },
   ],

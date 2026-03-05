@@ -89,7 +89,7 @@ export default function RegisterPage() {
         </div>
 
         {/* Card */}
-        <div style={{ background: '#0f0f0f', border: '1px solid #1e1e1e', borderRadius: 24, padding: '40px 36px' }}>
+        <div className="auth-card" style={{ background: '#0f0f0f', border: '1px solid #1e1e1e', borderRadius: 24, padding: '24px' }}>
 
           {step === 1 && (
             <>

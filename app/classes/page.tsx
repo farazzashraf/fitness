@@ -68,6 +68,59 @@ const classes = [
 
 const levels = ['All', 'Beginner', 'Intermediate', 'Advanced', 'All Levels']
 
+const NAV_ITEMS = ['Classes', 'Pricing', 'About', 'Blog']
+
+function MobileNav({ active }: { active: string }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+  return (
+    <>
+      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, background: menuOpen ? 'rgba(8,8,8,0.99)' : 'rgba(8,8,8,0.95)', backdropFilter: 'blur(12px)', borderBottom: '1px solid #1a1a1a', padding: '0 5%' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
+          <Link href="/" onClick={() => setMenuOpen(false)} style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 36, height: 36, background: 'var(--accent)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span className="font-display" style={{ color: '#000', fontSize: 20 }}>A</span>
+            </div>
+            <span className="font-display" style={{ fontSize: 28, letterSpacing: 4, color: '#fff' }}>APEX</span>
+          </Link>
+          <div className="nav-links" style={{ gap: 40, alignItems: 'center' }}>
+            {NAV_ITEMS.map(item => (
+              <Link key={item} href={`/${item.toLowerCase()}`} style={{ color: item === active ? 'var(--accent)' : '#aaa', textDecoration: 'none', fontSize: 14, fontWeight: 600, letterSpacing: 1, textTransform: 'uppercase', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent)')}
+                onMouseLeave={e => (e.currentTarget.style.color = item === active ? 'var(--accent)' : '#aaa')}
+              >{item}</Link>
+            ))}
+          </div>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <Link href="/login" className="nav-links" style={{ color: '#aaa', textDecoration: 'none', fontSize: 14, fontWeight: 600 }}>Log In</Link>
+            <Link href="/register" style={{ background: 'var(--accent)', color: '#000', padding: '10px 20px', borderRadius: 8, textDecoration: 'none', fontSize: 13, fontWeight: 700, whiteSpace: 'nowrap' }}>Join Now</Link>
+            <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} style={{ background: 'none', border: '1px solid #333', borderRadius: 8, width: 40, height: 40, alignItems: 'center', justifyContent: 'center', cursor: 'pointer', flexDirection: 'column', gap: 5, padding: 0 }}>
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', transform: menuOpen ? 'rotate(45deg) translate(3px, 3px)' : 'none' }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', opacity: menuOpen ? 0 : 1 }} />
+              <span style={{ display: 'block', width: 18, height: 2, background: menuOpen ? 'var(--accent)' : '#fff', borderRadius: 2, transition: 'all 0.25s', transform: menuOpen ? 'rotate(-45deg) translate(3px, -3px)' : 'none' }} />
+            </button>
+          </div>
+        </div>
+      </nav>
+      <div style={{
+        display: menuOpen ? 'flex' : 'none',
+        flexDirection: 'column',
+        position: 'fixed', top: 72, left: 0, right: 0, zIndex: 200,
+        background: 'rgba(8,8,8,0.99)', backdropFilter: 'blur(16px)',
+        borderBottom: '1px solid #1a1a1a',
+        padding: '12px 24px 20px',
+        gap: 4,
+        animation: menuOpen ? 'fadeIn 0.15s ease' : 'none',
+      }}>
+        {NAV_ITEMS.map(item => (
+          <Link key={item} href={`/${item.toLowerCase()}`} onClick={() => setMenuOpen(false)} style={{ display:'block',padding:'14px 12px',borderRadius:10,fontSize:14,fontWeight:700,letterSpacing:1,textTransform:'uppercase' as const,textDecoration:'none',borderBottom:'1px solid #111', color: item === active ? 'var(--accent)' : '#ccc' }}>{item}</Link>
+        ))}
+        <Link href="/login" onClick={() => setMenuOpen(false)} style={{ display:'block',padding:'14px 12px',borderRadius:10,fontSize:14,fontWeight:700,letterSpacing:1,textTransform:'uppercase' as const,textDecoration:'none',borderBottom:'1px solid #111', color: '#666' }}>Log In</Link>
+        <Link href="/register" onClick={() => setMenuOpen(false)} style={{ display:'block', padding:'14px 12px', borderRadius:10, fontSize:14, fontWeight:800, textDecoration:'none', color: 'var(--accent)' }}>Join Free →</Link>
+      </div>
+    </>
+  )
+}
+
 export default function ClassesPage() {
   const [hovered, setHovered] = useState<string | null>(null)
   const [filter, setFilter] = useState('All')
@@ -77,38 +130,7 @@ export default function ClassesPage() {
   return (
     <div style={{ background: 'var(--bg)', minHeight: '100vh', color: '#fff' }}>
       {/* Navbar */}
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: 'rgba(8,8,8,0.95)', backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid #1a1a1a', padding: '0 5%',
-      }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 72 }}>
-          <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <div style={{ width: 36, height: 36, background: 'var(--accent)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span className="font-display" style={{ color: '#000', fontSize: 20 }}>A</span>
-            </div>
-            <span className="font-display" style={{ fontSize: 28, letterSpacing: 4, color: '#fff' }}>APEX</span>
-          </Link>
-          <div style={{ display: 'flex', gap: 40, alignItems: 'center' }}>
-            {['Classes', 'Pricing', 'About', 'Blog'].map(item => (
-              <Link key={item} href={`/${item.toLowerCase()}`} style={{
-                color: item === 'Classes' ? 'var(--accent)' : '#aaa',
-                textDecoration: 'none', fontSize: 14, fontWeight: 600,
-                letterSpacing: 1, textTransform: 'uppercase',
-              }}>
-                {item}
-              </Link>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-            <Link href="/login" style={{ color: '#aaa', textDecoration: 'none', fontSize: 14, fontWeight: 600 }}>Log In</Link>
-            <Link href="/register" style={{
-              background: 'var(--accent)', color: '#000', padding: '10px 24px',
-              borderRadius: 8, textDecoration: 'none', fontSize: 14, fontWeight: 700,
-            }}>Join Now</Link>
-          </div>
-        </div>
-      </nav>
+      <MobileNav active="Classes" />
 
       {/* Hero */}
       <section style={{

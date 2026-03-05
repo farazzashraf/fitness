@@ -31,33 +31,69 @@ body {
 
 /* Animations */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideRight {
-  from { width: 0%; }
-  to { width: 100%; }
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(201, 255, 0, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(201, 255, 0, 0.6); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(201, 255, 0, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 40px rgba(201, 255, 0, 0.6);
+  }
 }
 
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-fadeUp {
@@ -80,14 +116,33 @@ body {
   animation: marquee 20s linear infinite;
 }
 
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
-.delay-600 { animation-delay: 0.6s; }
+.delay-100 {
+  animation-delay: 0.1s;
+}
 
-.opacity-0 { opacity: 0; }
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.delay-500 {
+  animation-delay: 0.5s;
+}
+
+.delay-600 {
+  animation-delay: 0.6s;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
 
 /* Noise texture overlay */
 .noise::after {
@@ -103,6 +158,7 @@ body {
 .accent-underline {
   position: relative;
 }
+
 .accent-underline::after {
   content: '';
   position: absolute;
@@ -118,6 +174,7 @@ body {
   position: relative;
   background: var(--card);
 }
+
 .gradient-border::before {
   content: '';
   position: absolute;
@@ -140,7 +197,326 @@ body {
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ── Mobile Responsive ──────────────────────────────────────── */
+.nav-links {
+  display: flex;
+}
+
+.nav-hamburger {
+  display: none;
+}
+
+.hero-float-card {
+  display: block;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: rgba(8, 8, 8, 0.98);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid #1a1a1a;
+  padding: 16px 24px;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 99;
+  animation: fadeIn 0.15s ease;
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 14px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #aaa;
+  text-decoration: none;
+  border-bottom: 1px solid #111;
+  transition: color 0.2s;
+}
+
+.mobile-menu a:last-child {
+  border-bottom: none;
+}
+
+.mobile-menu a:hover {
+  color: var(--accent);
+}
+
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 98;
+  backdrop-filter: blur(2px);
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    display: none !important;
+  }
+
+  .nav-hamburger {
+    display: flex !important;
+  }
+
+  .hero-float-card {
+    display: none !important;
+  }
+
+  .sidebar-backdrop {
+    display: block;
+  }
+}
+
+/* ── Dashboard Mobile ───────────────────────────────────────── */
+/* mobile-topbar visibility is controlled by JS inline style now */
+
+@media (max-width: 768px) {
+
+  /* Sidebar becomes overlay drawer - NO display:none, use transform */
+  .dash-sidebar-desktop {
+    position: fixed !important;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(.4, 0, .2, 1);
+    box-shadow: 4px 0 40px rgba(0, 0, 0, 0.8);
+    height: 100vh !important;
+    display: flex !important;
+  }
+
+  .dash-sidebar-desktop.open {
+    transform: translateX(0) !important;
+  }
+
+  .dash-main {
+    padding: 16px !important;
+  }
+
+  /* About page 2-col → 1-col */
+  .about-mission-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Blog featured grid → 1-col */
+  .blog-featured-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .blog-featured-thumb {
+    display: none !important;
+  }
+
+  /* Pricing cards → no scale transform on mobile */
+  .pricing-highlight {
+    transform: scale(1) !important;
+  }
+
+  /* Admin tabs scroll horizontally */
+  .admin-tabs {
+    overflow-x: auto;
+    padding-bottom: 4px;
+    flex-wrap: nowrap !important;
+  }
+
+  .admin-tabs::-webkit-scrollbar {
+    height: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hide-xs {
+    display: none !important;
+  }
+}
+
+/* ── Checkout Mobile ────────────────────────────────────────── */
+@media (max-width: 800px) {
+  .checkout-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Class Page Tabs Mobile ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .class-tab-nav {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 4px;
+  }
+
+  .class-tab-nav::-webkit-scrollbar {
+    height: 0;
+  }
+
+  .class-hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Admin Dashboard Responsive ─────────────────────────────── */
+.admin-topbar-badges {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.admin-1col {
+  grid-template-columns: 1fr !important;
+}
+
+@media (max-width: 900px) {
+  .admin-topbar-badges {
+    display: none !important;
+  }
+
+  .admin-grid-2col {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Customer table → cards */
+  .cust-table-header {
+    display: none !important;
+  }
+
+  .cust-table-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    padding: 16px !important;
+    border: 1px solid #1a1a1a !important;
+    border-radius: 12px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .cust-row-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .cust-row-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .cust-row-stats {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .cust-row-email {
+    font-size: 12px;
+    color: #555;
+  }
+
+  /* Hide email col on mobile (shown in card) */
+  .cust-col-email {
+    display: none !important;
+  }
+
+  .admin-churn-action {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .admin-churn-btn {
+    width: 100% !important;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-stat-value {
+    font-size: 28px !important;
+  }
+
+  .stat-card-inner {
+    padding: 16px 18px !important;
+  }
+}
+
+/* ── Responsive Utilities ────────────────────────────────────── */
+.mobile-only {
+  display: none !important;
+}
+
+.desktop-only {
+  display: block !important;
+}
+
+@media (max-width: 1024px) {
+  .mobile-only {
+    display: block !important;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+.table-scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.resp-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .resp-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.resp-flex-stack {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 900px) {
+  .resp-flex-stack {
+    flex-direction: column;
+  }
+}
