@@ -58,5 +58,3 @@ APEX is a premium, high-performance fitness management platform designed for mod
 
 ## 📱 Responsiveness
 The entire platform is built with a **Mobile-First** approach. The Admin Dashboard and AI Assistant are fully optimized for small screens, ensuring business owners can manage their gym on the go.
-
-@Faras Ashraf
