@@ -183,6 +183,7 @@ body {
   padding: 1px;
   background: linear-gradient(135deg, var(--accent), transparent 60%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
@@ -386,7 +387,7 @@ body {
 
   .animate-marquee {
     /* Make this number slightly higher than your desktop speed so it's readable on small screens */
-    animation: marquee 10s linear infinite; 
+    animation: marquee 10s linear infinite;
   }
 }
 
