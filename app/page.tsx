@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -33,6 +33,7 @@ interface PricingTier {
   description: string
   features: string[]
   cta: string
+  ctaHref: string // <-- Added this to route dynamically
   highlight: boolean
 }
 
@@ -129,6 +130,7 @@ const pricingTiers: PricingTier[] = [
       'Weekly newsletter',
     ],
     cta: 'Start Free',
+    ctaHref: '/register', // Goes to sign up
     highlight: false,
   },
   {
@@ -144,6 +146,7 @@ const pricingTiers: PricingTier[] = [
       'Priority support',
     ],
     cta: 'Go PRO',
+    ctaHref: '/register', // Goes to Pro checkout
     highlight: true,
   },
   {
@@ -160,6 +163,7 @@ const pricingTiers: PricingTier[] = [
       'Early access to new classes',
     ],
     cta: 'Go ELITE',
+    ctaHref: '/register', // Goes to Elite checkout
     highlight: false,
   },
 ]
@@ -342,7 +346,7 @@ function HeroSection() {
             className="animate-fadeUp opacity-0 delay-300"
             style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}
           >
-            <Link href="/pricing" style={{
+            <Link href="/register" style={{
               background: 'var(--accent)', color: '#000',
               padding: '16px 40px', borderRadius: 12,
               textDecoration: 'none', fontSize: 15,
@@ -361,7 +365,7 @@ function HeroSection() {
             >
               Start Free Trial
             </Link>
-            <Link href="/classes/yoga" style={{
+            <Link href="/classes" style={{
               background: 'transparent',
               border: '1px solid #333', color: '#fff',
               padding: '16px 40px', borderRadius: 12,
@@ -420,14 +424,15 @@ function HeroSection() {
             <div style={{ color: 'var(--accent)', fontSize: 13, marginTop: 2 }}>Starting in 22 min</div>
           </div>
         </div>
-        <div style={{
+        <Link href="/login" style={{
+          display: 'block', textDecoration: 'none',
           marginTop: 14, background: 'var(--accent)', color: '#000',
           borderRadius: 8, padding: '8px 0', textAlign: 'center',
           fontSize: 12, fontWeight: 800, letterSpacing: 1,
           cursor: 'pointer',
         }}>
           JOIN CLASS
-        </div>
+        </Link>
       </div>
 
       {/* Scroll hint */}
@@ -779,7 +784,7 @@ function PricingSection() {
                 ))}
               </ul>
 
-              <Link href="/pricing" style={{ textDecoration: 'none' }}>
+              <Link href={tier.ctaHref} style={{ textDecoration: 'none' }}>
                 <div style={{
                   background: tier.highlight ? '#000' : 'transparent',
                   border: tier.highlight ? 'none' : '1px solid var(--accent)',

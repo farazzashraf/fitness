@@ -113,7 +113,7 @@ body {
 }
 
 .animate-marquee {
-  animation: marquee 20s linear infinite;
+  animation: marquee 5s linear infinite;
 }
 
 .delay-100 {
@@ -382,6 +382,11 @@ body {
 
   .class-hero-grid {
     grid-template-columns: 1fr !important;
+  }
+
+  .animate-marquee {
+    /* Make this number slightly higher than your desktop speed so it's readable on small screens */
+    animation: marquee 10s linear infinite; 
   }
 }
 
