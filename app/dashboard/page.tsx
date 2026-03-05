@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 // Types & Data
 import { Tab, UserData } from './types'
-import { defaultMemberData } from './data'
+import { defaultMemberData, mockAttendance } from './data'
 import { useBreakpoint } from './hooks/useBreakpoint'
 
 // Layout Components
@@ -21,6 +21,7 @@ import { ProgressTab } from './components/tabs/ProgressTab'
 import { NutritionTab } from './components/tabs/NutritionTab'
 import { CommunityTab } from './components/tabs/CommunityTab'
 import { AICoachTab } from './components/tabs/AICoachTab'
+import { PTCoachTab } from './components/tabs/PTCoachTab'
 
 export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState<Tab>('overview')
@@ -43,11 +44,12 @@ export default function DashboardPage() {
         ...defaultMemberData,
         ...parsed,
         initials: initials,
-        streak: isElite ? 24 : isPro ? 14 : 3,
-        classesThisMonth: isElite ? 12 : isPro ? 8 : 2,
-        totalClasses: isElite ? 156 : isPro ? 121 : 12,
-        caloriesBurned: isElite ? 24500 : isPro ? 18400 : 3200,
-        joinedDays: isElite ? 412 : isPro ? 365 : 45,
+        streak: isElite ? 24 : 14,
+        classesThisMonth: isElite ? 12 : 8,
+        totalClasses: isElite ? 156 : 121,
+        caloriesBurned: isElite ? 24500 : 18400,
+        joinedDays: isElite ? 412 : 365,
+        attendance: mockAttendance,
       })
     } else {
       router.push('/login')
@@ -76,7 +78,8 @@ export default function DashboardPage() {
     progress: 'My Progress',
     nutrition: 'Nutrition Guides',
     community: 'Community Forum',
-    ai: 'AI Coach Q&A'
+    ai: 'AI Coach Q&A',
+    pt: 'Personal Trainer'
   }
 
   return (
@@ -123,6 +126,7 @@ export default function DashboardPage() {
           {activeTab === 'nutrition' && <NutritionTab bp={bp} user={user} />}
           {activeTab === 'community' && <CommunityTab bp={bp} />}
           {activeTab === 'ai' && <AICoachTab bp={bp} user={user} />}
+          {activeTab === 'pt' && <PTCoachTab bp={bp} user={user} />}
 
         </main>
       </div>

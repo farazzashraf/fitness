@@ -8,11 +8,10 @@ export function Sidebar({ active, setActive, onLogout, collapsed, user }: { acti
     { id: 'progress', label: 'Progress', icon: '📈' },
     { id: 'nutrition', label: 'Nutrition', icon: '🥗' },
     { id: 'community', label: 'Community', icon: '💬' },
-    { id: 'live', label: 'Live Classes', icon: '📡' },
     { id: 'ai', label: 'AI Coach Q&A', icon: '🤖' },
+    { id: 'pt', label: 'PT Coach', icon: '👟' },
   ]
 
-  const isFree = user?.plan === 'FREE'
   const isPro = user?.plan === 'PRO'
 
   return (
@@ -33,8 +32,7 @@ export function Sidebar({ active, setActive, onLogout, collapsed, user }: { acti
       <nav style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
         {items.map(item => {
           let isLocked = false;
-          if (isFree && (item.id === 'progress' || item.id === 'nutrition' || item.id === 'live' || item.id === 'ai')) isLocked = true;
-          if (isPro && (item.id === 'live' || item.id === 'ai')) isLocked = true;
+          if (isPro && (item.id === 'live' || item.id === 'pt')) isLocked = true;
 
           return (
             <button
@@ -60,18 +58,12 @@ export function Sidebar({ active, setActive, onLogout, collapsed, user }: { acti
           )
         })}
 
-        {isFree && !collapsed && (
-          <div style={{ margin: '20px 4px 0', background: 'rgba(201,255,0,0.06)', border: '1px solid rgba(201,255,0,0.2)', borderRadius: 14, padding: '16px 14px' }}>
-            <div style={{ fontSize: 12, color: '#C9FF00', fontWeight: 700, marginBottom: 6 }}>Unlock PRO</div>
-            <div style={{ fontSize: 12, color: '#555', lineHeight: 1.6, marginBottom: 12 }}>Get full access to all on-demand training & progress tracking.</div>
-            <Link href="/pricing" style={{ display: 'block', textAlign: 'center', background: '#C9FF00', color: '#000', borderRadius: 8, padding: '8px 0', fontSize: 12, fontWeight: 800, textDecoration: 'none' }}>Upgrade →</Link>
-          </div>
-        )}
+
 
         {isPro && !collapsed && (
           <div style={{ margin: '20px 4px 0', background: 'rgba(167,139,250,0.06)', border: '1px solid rgba(167,139,250,0.2)', borderRadius: 14, padding: '16px 14px' }}>
             <div style={{ fontSize: 12, color: '#A78BFA', fontWeight: 700, marginBottom: 6 }}>Unlock ELITE</div>
-            <div style={{ fontSize: 12, color: '#555', lineHeight: 1.6, marginBottom: 12 }}>Join daily live classes & get 24/7 AI coaching.</div>
+            <div style={{ fontSize: 12, color: '#555', lineHeight: 1.6, marginBottom: 12 }}>Unlock Daily Live Classes & Personal Coaching.</div>
             <Link href="/pricing" style={{ display: 'block', textAlign: 'center', background: '#A78BFA', color: '#000', borderRadius: 8, padding: '8px 0', fontSize: 12, fontWeight: 800, textDecoration: 'none' }}>Upgrade →</Link>
           </div>
         )}

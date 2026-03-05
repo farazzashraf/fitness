@@ -89,7 +89,7 @@ export default function AboutPage() {
             BUILT FOR<br /><span style={{ color: 'var(--accent)' }}>CHAMPIONS</span>
           </h1>
           <p style={{ color: '#666', fontSize: 18, maxWidth: 560, margin: '0 auto', lineHeight: 1.8 }}>
-            APEX was born from a simple belief — world-class fitness coaching shouldn't be locked behind expensive gym memberships or geography. We're here to change that.
+            APEX was born from a simple belief -world-class fitness coaching shouldn't be locked behind expensive gym memberships or geography. We're here to change that.
           </p>
         </div>
       </section>
@@ -106,7 +106,7 @@ export default function AboutPage() {
               We built APEX because we were frustrated. Frustrated with gyms charging ₹5,000/month for equipment you never used. Frustrated with online content that was either too basic or too expensive.
             </p>
             <p style={{ color: '#777', fontSize: 16, lineHeight: 1.9 }}>
-              So we hired the best instructors we could find, built a platform obsessed with quality, and priced it at a fraction of what it's worth. The result is APEX — and 12,400 members who train harder because of it.
+              So we hired the best instructors we could find, built a platform obsessed with quality, and priced it at a fraction of what it's worth. The result is APEX -and 12,400 members who train harder because of it.
             </p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
@@ -136,7 +136,7 @@ export default function AboutPage() {
             {[
               { icon: '🎯', title: 'Results First', desc: 'Every class, program, and feature is built around one question: does it get results? If it doesn\'t, we cut it.' },
               { icon: '🔓', title: 'Accessible to All', desc: 'World-class coaching shouldn\'t require a world-class budget. We price for impact, not profit maximization.' },
-              { icon: '🧠', title: 'Science-Backed', desc: 'Our programs are built on exercise science, not trends. Periodization, progressive overload, recovery — all intentional.' },
+              { icon: '🧠', title: 'Science-Backed', desc: 'Our programs are built on exercise science, not trends. Periodization, progressive overload, recovery -all intentional.' },
               { icon: '🤝', title: 'Community Driven', desc: 'Fitness is better together. Live classes, forums, and events exist to build real connections between members.' },
             ].map(v => (
               <div key={v.title} style={{ background: '#0f0f0f', border: '1px solid #1a1a1a', borderRadius: 20, padding: 28 }}>

@@ -22,7 +22,6 @@ export default function LoginPage() {
 
     const users = [
       { email: process.env.NEXT_PUBLIC_ADMIN_EMAIL, password: process.env.NEXT_PUBLIC_ADMIN_PASSWORD, plan: 'ADMIN', name: 'Admin' },
-      { email: process.env.NEXT_PUBLIC_FREE_EMAIL, password: process.env.NEXT_PUBLIC_FREE_PASSWORD, plan: 'FREE', name: 'Alex Free' },
       { email: process.env.NEXT_PUBLIC_PRO_EMAIL, password: process.env.NEXT_PUBLIC_PRO_PASSWORD, plan: 'PRO', name: 'David Kim' },
       { email: process.env.NEXT_PUBLIC_ELITE_EMAIL, password: process.env.NEXT_PUBLIC_ELITE_PASSWORD, plan: 'ELITE', name: 'Aisha Patel' },
     ]

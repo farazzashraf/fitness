@@ -25,7 +25,7 @@ const posts = [
     id: 2,
     slug: 'hiit-vs-steady-state',
     title: 'HIIT vs Steady-State Cardio: Which Actually Burns More Fat?',
-    excerpt: 'The internet has been arguing about this for a decade. We looked at the actual research and here\'s what the science says — and what it means for your training.',
+    excerpt: 'The internet has been arguing about this for a decade. We looked at the actual research and here\'s what the science says -and what it means for your training.',
     author: 'Marcus Cole',
     initials: 'MC',
     authorColor: '#EA580C',
@@ -55,7 +55,7 @@ const posts = [
     id: 4,
     slug: 'core-vs-abs',
     title: 'Core Strength vs Ab Strength: They\'re Not the Same Thing',
-    excerpt: 'Six-pack abs and a strong core are not the same thing. Understanding the difference will completely change how you train — and how you feel.',
+    excerpt: 'Six-pack abs and a strong core are not the same thing. Understanding the difference will completely change how you train -and how you feel.',
     author: 'Sofia Reyes',
     initials: 'SR',
     authorColor: '#0891B2',
@@ -85,7 +85,7 @@ const posts = [
     id: 6,
     slug: 'recovery-science',
     title: 'The Science of Recovery: Why Rest Days Are Part of Training',
-    excerpt: 'Rest days aren\'t lazy. They\'re where adaptation happens. Here\'s what your body is actually doing on your days off — and how to optimize recovery.',
+    excerpt: 'Rest days aren\'t lazy. They\'re where adaptation happens. Here\'s what your body is actually doing on your days off -and how to optimize recovery.',
     author: 'Priya Sharma',
     initials: 'PS',
     authorColor: '#7C3AED',
@@ -100,7 +100,7 @@ const posts = [
     id: 7,
     slug: 'beginner-mistakes',
     title: '7 Mistakes Every Fitness Beginner Makes (And How to Avoid Them)',
-    excerpt: 'Starting a fitness journey is hard. Starting one with bad habits is even harder to fix later. Here are the most common mistakes we see — and exactly how to avoid them.',
+    excerpt: 'Starting a fitness journey is hard. Starting one with bad habits is even harder to fix later. Here are the most common mistakes we see -and exactly how to avoid them.',
     author: 'Sofia Reyes',
     initials: 'SR',
     authorColor: '#0891B2',
@@ -115,7 +115,7 @@ const posts = [
     id: 8,
     slug: 'consistency-over-intensity',
     title: 'Consistency Beats Intensity: Why Showing Up Matters More',
-    excerpt: 'The best workout is the one you actually do. Here\'s the psychology behind building a sustainable training habit — backed by behavioural science.',
+    excerpt: 'The best workout is the one you actually do. Here\'s the psychology behind building a sustainable training habit -backed by behavioural science.',
     author: 'Jake Monroe',
     initials: 'JM',
     authorColor: '#C9FF00',
@@ -346,7 +346,7 @@ export default function BlogPage() {
           <div style={{ fontSize: 28, marginBottom: 16 }}>📬</div>
           <h2 style={{ fontSize: 24, fontWeight: 800, marginBottom: 10 }}>Get the weekly training digest</h2>
           <p style={{ color: '#666', fontSize: 15, marginBottom: 32, maxWidth: 440, margin: '0 auto 32px' }}>
-            New articles, class announcements, and training tips. Every week. No spam — ever.
+            New articles, class announcements, and training tips. Every week. No spam -ever.
           </p>
           <div style={{ display: 'flex', gap: 10, maxWidth: 440, margin: '0 auto', justifyContent: 'center', flexWrap: 'wrap' }}>
             <input

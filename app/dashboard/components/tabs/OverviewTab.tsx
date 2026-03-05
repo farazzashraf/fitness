@@ -7,7 +7,7 @@ export function OverviewTab({ bp, user }: { bp: 'mobile' | 'tablet' | 'desktop';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: isMobile ? 16 : 24 }}>
-      
+
       {/* 1. Welcome Banner + Quick Action CTA */}
       <div style={{
         background: 'linear-gradient(135deg, #0f0f0f, #111)', border: '1px solid #1a1a1a', borderRadius: isMobile ? 16 : 20,
@@ -28,8 +28,8 @@ export function OverviewTab({ bp, user }: { bp: 'mobile' | 'tablet' | 'desktop';
           fontWeight: 800, fontSize: 13, border: 'none', cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase',
           width: isMobile ? '100%' : 'auto', transition: 'all 0.2s',
         }}
-        onMouseEnter={e => e.currentTarget.style.boxShadow = '0 8px 24px rgba(201,255,0,0.25)'}
-        onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
+          onMouseEnter={e => e.currentTarget.style.boxShadow = '0 8px 24px rgba(201,255,0,0.25)'}
+          onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
         >
           Start Workout →
         </button>
@@ -51,9 +51,34 @@ export function OverviewTab({ bp, user }: { bp: 'mobile' | 'tablet' | 'desktop';
         ))}
       </div>
 
+      {/* 2.5 Weekly Attendance Scorecard */}
+      <div style={{ background: '#0f0f0f', border: '1px solid #1a1a1a', borderRadius: 16, padding: isMobile ? '20px 16px' : '24px 28px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+          <div>
+            <h3 style={{ fontSize: 16, fontWeight: 700 }}>Weekly Attendance</h3>
+            <p style={{ fontSize: 12, color: '#555', marginTop: 4 }}>This week's gym & class check-ins</p>
+          </div>
+          <div style={{ background: 'rgba(201,255,0,0.06)', border: '1px solid rgba(201,255,0,0.15)', borderRadius: 100, padding: '4px 12px', fontSize: 11, color: 'var(--accent)', fontWeight: 700 }}>
+            {user.attendance.filter(a => a.attended).length}/7 DAYS
+          </div>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
+          {user.attendance.map((a, i) => (
+            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, flex: 1 }}>
+              <span style={{ fontSize: 11, color: '#444', fontWeight: 700 }}>{a.day}</span>
+              <div style={{
+                width: '100%', height: 8, borderRadius: 4,
+                background: a.attended === true ? 'var(--accent)' : a.attended === false ? '#333' : '#111',
+                boxShadow: a.attended === true ? '0 0 12px rgba(201,255,0,0.3)' : 'none'
+              }} />
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* 3. Bottom Grid: Up Next & Activity */}
       <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 16 : 24 }}>
-        
+
         {/* Up Next (Live Class Teaser) */}
         <div style={{ background: '#0f0f0f', border: '1px solid #1a1a1a', borderRadius: 16, padding: isMobile ? '20px 16px' : '24px 28px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
@@ -64,11 +89,11 @@ export function OverviewTab({ bp, user }: { bp: 'mobile' | 'tablet' | 'desktop';
           </div>
 
           {liveClasses.slice(0, 1).map((c, i) => (
-            <div key={i} style={{ 
-              display: 'flex', alignItems: 'center', gap: 16, background: '#111', padding: 16, 
-              borderRadius: 12, border: '1px solid #1a1a1a', 
-              filter: user.plan !== 'ELITE' ? 'grayscale(1)' : 'none', 
-              opacity: user.plan !== 'ELITE' ? 0.6 : 1 
+            <div key={i} style={{
+              display: 'flex', alignItems: 'center', gap: 16, background: '#111', padding: 16,
+              borderRadius: 12, border: '1px solid #1a1a1a',
+              filter: user.plan !== 'ELITE' ? 'grayscale(1)' : 'none',
+              opacity: user.plan !== 'ELITE' ? 0.6 : 1
             }}>
               <div style={{ fontSize: 28 }}>{c.emoji}</div>
               <div style={{ flex: 1 }}>
@@ -94,9 +119,9 @@ export function OverviewTab({ bp, user }: { bp: 'mobile' | 'tablet' | 'desktop';
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {recentActivity.slice(0, 3).map((activity, i) => (
               <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
-                <div style={{ 
-                  width: 40, height: 40, borderRadius: 10, background: '#111', 
-                  border: '1px solid #222', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 
+                <div style={{
+                  width: 40, height: 40, borderRadius: 10, background: '#111',
+                  border: '1px solid #222', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18
                 }}>
                   {activity.emoji}
                 </div>

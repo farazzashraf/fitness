@@ -328,7 +328,7 @@ export default function ClassPageTemplate({ cls }: { cls: ClassData }) {
           <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 32 }}>
               <h2 className="font-display" style={{ fontSize: 40, letterSpacing: 2 }}>VIDEO LIBRARY</h2>
-              <p style={{ color: '#555', fontSize: 13 }}>PRO & ELITE only — <Link href="/pricing" style={{ color: cls.accentColor }}>upgrade to unlock</Link></p>
+              <p style={{ color: '#555', fontSize: 13 }}>PRO & ELITE only -<Link href="/pricing" style={{ color: cls.accentColor }}>upgrade to unlock</Link></p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 16 }}>
               {cls.videos.map((v, i) => (

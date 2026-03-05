@@ -600,7 +600,7 @@ function ChurnTab() {
       </div>
       <div style={{ background: '#0f0f0f', border: '1px solid #1a1a1a', borderRadius: 16, padding: '24px 20px' }}>
         <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 4 }}>Churn Rate Trend</div>
-        <div style={{ fontSize: 12, color: '#555', marginBottom: 24 }}>Last 9 months — target: under 3%</div>
+        <div style={{ fontSize: 12, color: '#555', marginBottom: 24 }}>Last 9 months -target: under 3%</div>
         <ResponsiveContainer width="100%" height={220}>
           <LineChart data={churnData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#1a1a1a" />
@@ -718,7 +718,7 @@ export default function AdminDashboard() {
             <span className="font-display" style={{ fontSize: 18, letterSpacing: 3, color: '#fff' }}>APEX</span>
           </div>
 
-          {/* Logout button — mobile */}
+          {/* Logout button -mobile */}
           <button
             onClick={handleLogout}
             title="Sign out"

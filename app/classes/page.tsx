@@ -205,7 +205,7 @@ export default function ClassesPage() {
           ))}
         </div>
 
-        {/* Class cards — large format */}
+        {/* Class cards -large format */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           {filtered.map((cls, i) => (
             <Link key={cls.id} href={`/classes/${cls.id}`} style={{ textDecoration: 'none' }}>

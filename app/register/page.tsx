@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 const plans = [
-  { id: 'FREE', label: 'Free', price: '₹0', desc: 'Explore the platform' },
   { id: 'PRO', label: 'Pro', price: '₹2,499/mo', desc: 'Full video library' },
   { id: 'ELITE', label: 'Elite', price: '₹4,999/mo', desc: 'Live classes + AI coaching' },
 ]
@@ -13,7 +12,7 @@ const plans = [
 export default function RegisterPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const defaultPlan = searchParams.get('plan')?.toUpperCase() || 'FREE'
+  const defaultPlan = searchParams.get('plan')?.toUpperCase() || 'PRO'
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -31,7 +30,7 @@ export default function RegisterPage() {
   const handleSubmit = async () => {
     setLoading(true)
     await new Promise(r => setTimeout(r, 1200))
-    router.push('/dashboard')
+    router.push(`/checkout?plan=${plan.toLowerCase()}`)
   }
 
   return (
@@ -234,15 +233,13 @@ export default function RegisterPage() {
                 ))}
               </div>
 
-              {plan !== 'FREE' && (
-                <div style={{
-                  background: 'rgba(201,255,0,0.05)', border: '1px solid rgba(201,255,0,0.15)',
-                  borderRadius: 12, padding: '12px 16px', marginBottom: 24,
-                  fontSize: 13, color: '#888', lineHeight: 1.6,
-                }}>
-                  ✓ 14-day free trial · No credit card charged today · Cancel anytime
-                </div>
-              )}
+              <div style={{
+                background: 'rgba(201,255,0,0.05)', border: '1px solid rgba(201,255,0,0.15)',
+                borderRadius: 12, padding: '12px 16px', marginBottom: 24,
+                fontSize: 13, color: '#888', lineHeight: 1.6,
+              }}>
+                ✓ 14-day free trial · No credit card charged today · Cancel anytime
+              </div>
 
               <div style={{ display: 'flex', gap: 10 }}>
                 <button
@@ -276,7 +273,7 @@ export default function RegisterPage() {
                       }} />
                       Creating...
                     </>
-                  ) : plan === 'FREE' ? 'Get Started Free →' : 'Start Free Trial →'}
+                  ) : 'Continue to Checkout →'}
                 </button>
               </div>
             </>
